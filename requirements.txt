@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+seaborn
+matplotlib
+scipy
+statsmodels
+xgboost
+lightgbm
+catboost
+pandas-summary
+dill
+flask
+psycopg2
+-e .
