@@ -53,7 +53,7 @@ class DataIngestion:
         try:
             logging.info("Starting data ingestion process...")
             df = pd.read_csv("../train.csv")
-            df = df.tail(100000)  # Limit to the last 100,000 rows for testing purposes
+            df = df.sample(100000)  
             
             # Create the artifacts directory if it doesn't exist
             os.makedirs(os.path.dirname(self.config.train_data_path), exist_ok=True)

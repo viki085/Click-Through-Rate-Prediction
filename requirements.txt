@@ -12,4 +12,5 @@ pandas-summary
 dill
 flask
 psycopg2
+category_encoders
 -e .
