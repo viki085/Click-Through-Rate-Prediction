@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from exception import CustomException   
 import psycopg2
+import numexpr
+os.environ["NUMEXPR_MAX_THREADS"] = "32"
 
 # Postgres connection details
 conn = {
@@ -49,15 +51,12 @@ class DataIngestion:
         and save them to specified paths.
         """
         try:
-            print("Data Ingestion Started")
-            df = read_data_from_postgres("SELECT * FROM avazu_train LIMIT 100000;")
-
+            logging.info("Starting data ingestion process...")
+            df = pd.read_csv("../train.csv")
+            df = df.tail(100000)  # Limit to the last 100,000 rows for testing purposes
+            
             # Create the artifacts directory if it doesn't exist
             os.makedirs(os.path.dirname(self.config.train_data_path), exist_ok=True)
-
-            # Save the raw data
-            df.to_csv(self.config.raw_data_path, index=False)
-            logging.info("Raw data saved")
 
             # Split the data into train and test sets
             train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)

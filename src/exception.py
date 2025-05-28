@@ -1,5 +1,5 @@
 import sys  
-from src.logger import logging
+from logger import logging
 
 def exception_handler(error, error_detail:sys):
     """
